@@ -32,6 +32,8 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Estudiante</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Estudiante</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Eliminar Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="reporteUser()">Reporte</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="reporteDompdf()">Reporte Dompdf</a>
         
         <span style="margin-left:20px;">Cédula:</span>
         <input id="txtBuscarCedula" class="easyui-textbox" style="width:120px">
@@ -136,6 +138,17 @@
                 });
             }
         }
+
+        function reporteUser(){
+    // queryParams guarda lo que mandó la última búsqueda (datagrid 'load')
+    var cedula = $('#dg').datagrid('options').queryParams.estcedula || '';
+    window.open('reporte.php?estcedula=' + encodeURIComponent(cedula), '_blank');
+}
+
+function reporteDompdf(){
+    var cedula = $('#dg').datagrid('options').queryParams.estcedula || '';
+    window.open('reporte_dompdf.php?estcedula=' + encodeURIComponent(cedula), '_blank');
+}
     </script>
 </body>
 </html>

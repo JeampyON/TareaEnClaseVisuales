@@ -12,6 +12,8 @@
             <input type="text" id="txtBuscarCedula" class="form-control" placeholder="Buscar por cédula..." style="width: 200px;">
             <button type="button" class="btn btn-primary" onclick="buscarUser()">Buscar</button>
             <button type="button" class="btn btn-secondary" onclick="limpiarBusqueda()">Mostrar Todos</button>
+            <button type="button" class="btn btn-danger" onclick="reporteUser()">Reporte</button>
+            <button type="button" class="btn btn-dark" onclick="reporteDompdf()">Reporte Dompdf</button>
         </div>
     </div>
 
@@ -73,9 +75,11 @@
 <script type="text/javascript">
     var url;
     var rows = [];
+    var cedulaActual = '';
     var modalBootstrap = new bootstrap.Modal(document.getElementById('dlg'));
 
     function reloadData(cedula = '') {
+        cedulaActual = cedula; 
         $.getJSON('models/select.php', { estcedula: cedula }, function(data) {
             rows = Array.isArray(data) ? data : [];
             var html = '';
@@ -153,6 +157,14 @@
             }, 'json');
         }
     }
+
+    function reporteUser() {
+    window.open('reporte.php?estcedula=' + encodeURIComponent(cedulaActual), '_blank');
+}
+function reporteDompdf() {
+    window.open('reporte_dompdf.php?estcedula=' + encodeURIComponent(cedulaActual), '_blank');
+}
+
 
     reloadData();
 </script>
